@@ -1,0 +1,71 @@
+<mat-card (click)='navigateToGiftCardList()'>
+  <mat-card-actions>
+    <button mat-button>
+      <mat-icon>keyboard_backspace</mat-icon>    
+    <span>&nbsp; Back to the list</span></button>
+  </mat-card-actions>
+</mat-card>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h1 class="bold red"># {{giftCard.id}}</h1>
+      <h1 *ngIf="displayError">Error updating gift card. Please contact support</h1>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field class="full-width">
+      <input matInput placeholder="FROM" disabled [(ngModel)]="giftCard.from">
+    </mat-form-field>
+     <mat-form-field class="full-width">
+      <input matInput placeholder="TO" disabled [(ngModel)]="giftCard.to">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput placeholder="AMOUNT" disabled [ngModel]="giftCard.amount | currency">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+        <input matInput placeholder="DATE SOLD" disabled [ngModel]="giftCard.dateSold | date">
+      </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput placeholder="NOTE" disabled [(ngModel)]="giftCard.note">
+    </mat-form-field> 
+    <mat-form-field class="full-width">
+        <input matInput placeholder="TRANSACTION DETAILS" [(ngModel)]="transactionMessage">
+      </mat-form-field> 
+      <div *ngIf="specificAmountUsedIsVisible">
+      <mat-form-field class="full-width">
+          <input matInput type="number" placeholder="AMOUNT" [(ngModel)]="specificAmount">
+      </mat-form-field>
+      <button mat-raised-button color="warm" (click)="useSpecificAmount()">APPLY THIS AMOUNT</button>
+      </div>
+  </mat-card-content> 
+  <mat-card-actions>
+    <button mat-raised-button color="warn" disabled="{{buttonsAreDisabled}}" (click)="useEntireAmount()">USE THE ENTIRE AMOUNT: {{giftCard.amount | currency}}</button>
+    <button mat-raised-button color="primary" disabled="{{buttonsAreDisabled}}" (click)="useOtherAmount()">USE OTHER AMOUNT</button>
+  </mat-card-actions>
+</mat-card>
+<mat-card>
+  <mat-card-content>
+    <div class="mat-elevation-z8" *ngIf="displayTransactionsTable">
+    <table  mat-table [dataSource]='dataSource'>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let element">{{element.id}}</td>
+      </ng-container>
+      <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>Date</th>
+          <td mat-cell *matCellDef="let element">{{element.date | date}}</td>
+        </ng-container>
+        <ng-container matColumnDef="amountUsed">
+            <th mat-header-cell *matHeaderCellDef>Amount Used</th>
+            <td mat-cell *matCellDef="let element">{{element.amountUsed | currency}}</td>
+          </ng-container>
+          <ng-container matColumnDef="transactionNote">
+              <th mat-header-cell *matHeaderCellDef>Transaction Note</th>
+              <td mat-cell *matCellDef="let element">{{element.transactionNote}}</td>
+            </ng-container>
+      <tr mat-header-row *matHeaderRowDef="transactionDisplayColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: transactionDisplayColumns"></tr>
+    </table>
+  </div>
+  </mat-card-content>
+</mat-card>

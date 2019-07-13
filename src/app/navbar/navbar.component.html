@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span (click)="navigateToList()">{{applicationName}}</span>
+    <span class="spacer"></span>
+    <!-- <app-navbar-menu></app-navbar-menu> -->
+    
+    <button mat-button (click)="registerNewGiftcard()">
+        <mat-icon>card_giftcard</mat-icon>
+      <span>&nbsp; Register New Gift Certificate</span>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>

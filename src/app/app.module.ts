@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NewGiftCardComponent } from './gift-cards/new-gift-card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GiftCardIdDialogComponent } from './gift-cards/dialog/gift-card-id-dialog.component';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { GiftCardIdDialogComponent } from './gift-cards/dialog/gift-card-id-dial
     FormsModule,    
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent],
   entryComponents: [GiftCardIdDialogComponent]
 })

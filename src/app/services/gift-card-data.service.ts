@@ -9,7 +9,8 @@ import { ITransaction } from '../models/transaction';
   providedIn: 'root'
 })
 export class GiftCardDataService {
-  private _giftCardsURL = 'https://localhost:44318/api/gc';
+  private _giftCardsURL = 'https://localhost:44380/api/v1/giftcard';
+  private _giftCardTransactionURL='https://localhost:44380/api/v1/giftcardtransaction';
   
   constructor(private _http: HttpClient) { }
   getGiftCards(): Observable<IGiftCard[]> {
@@ -28,7 +29,7 @@ export class GiftCardDataService {
   } 
   createTransaction(transaction: ITransaction): Observable<ITransaction> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });    
-    return this._http.post<ITransaction>(this._giftCardsURL +'/posttransaction', transaction, { headers: headers })
+    return this._http.post<ITransaction>(this._giftCardTransactionURL, transaction, { headers: headers })
       .pipe(
         tap(data => console.log('created transaction: ' + JSON.stringify(data))),
         catchError(this.handleError)
@@ -36,7 +37,7 @@ export class GiftCardDataService {
   }
   getGiftCardTransactions(giftCardId: number): Observable<ITransaction[]> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' }); 
-    return this._http.get<ITransaction[]>(this._giftCardsURL + '/transaction/giftcard/' + giftCardId).pipe(tap(), catchError(this.handleError)); 
+    return this._http.get<ITransaction[]>(this._giftCardTransactionURL + '/giftcard/' + giftCardId).pipe(tap(), catchError(this.handleError)); 
   }
   private handleError(err) {
     let errorMessage = '';

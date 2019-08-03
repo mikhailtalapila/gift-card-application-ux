@@ -60,8 +60,8 @@ export class GiftCardDetailsComponent implements OnInit {
       this.giftCard.amount = 0;
       this.transaction = {
         id: 0,
-        date: new Date,
-        gcId: this.giftCard.id,
+        transactionDate: new Date,
+        giftCardId: this.giftCard.id,
         amountUsed: amountUsed,
         transactionNote: this.transactionMessage,
         giftCard: this.giftCard
@@ -92,8 +92,8 @@ export class GiftCardDetailsComponent implements OnInit {
       this.giftCard.amount = 0;
       this.transaction = {
         id: 0,
-        date: new Date,
-        gcId: this.giftCard.id,
+        transactionDate: new Date,
+        giftCardId: this.giftCard.id,
         amountUsed: amountUsed,
         transactionNote: this.transactionMessage,
         giftCard: this.giftCard
@@ -115,8 +115,8 @@ export class GiftCardDetailsComponent implements OnInit {
       this.giftCard.amount = this.giftCard.amount - this.specificAmount;
       this.transaction = {
         id: 0,
-        date: new Date,
-        gcId: this.giftCard.id,
+        transactionDate: new Date,
+        giftCardId: this.giftCard.id,
         amountUsed: amountUsed,
         transactionNote: this.transactionMessage,
         giftCard: this.giftCard
@@ -134,6 +134,6 @@ export class GiftCardDetailsComponent implements OnInit {
       );
     }
     this.specificAmountUsedIsVisible = false;
-    this.specificAmount = 0;
+    this.specificAmount = 0; 
   }
 }
